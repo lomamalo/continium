@@ -17,7 +17,7 @@ navLinks.addEventListener('click', (e) => {
 });
 
 // Copier la commande d'installation en un clic.
-const oneLiner = 'curl -fsSL https://raw.githubusercontent.com/lomaloma/continium/main/continium-site/install-pc.sh | bash';
+const oneLiner = 'curl -fsSL https://raw.githubusercontent.com/lomamalo/continium/main/continium-site/install-pc.sh | bash';
 const copyBtn = document.getElementById('copyOneLiner');
 
 async function copy(text, btn) {

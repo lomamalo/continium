@@ -141,7 +141,7 @@
         <p class="dl-meta">v1.0.0 · APK debug · Android 10+</p>
         <p class="dl-desc">Presse-papier, liens, fichiers, statut du boîtier en direct.</p>
       </div>
-      <a class="btn btn-primary btn-lg" href="https://github.com/lomaloma/continium/releases/latest/download/continium.apk" id="apkBtn">
+      <a class="btn btn-primary btn-lg" href="https://github.com/lomamalo/continium/releases/latest/download/continium.apk" id="apkBtn">
         Télécharger l'APK
       </a>
     </div>
@@ -162,7 +162,7 @@
     </p>
 
     <div class="code-block">
-      <span class="prompt">$</span> curl -fsSL https://raw.githubusercontent.com/lomaloma/continium/main/continium-site/install-pc.sh <span class="muted">|</span> bash
+      <span class="prompt">$</span> curl -fsSL https://raw.githubusercontent.com/lomamalo/continium/main/continium-site/install-pc.sh <span class="muted">|</span> bash
       <button class="copy-btn" id="copyOneLiner" title="Copier">Copier</button>
     </div>
 
@@ -171,7 +171,7 @@
       <pre class="code-block pre"><span class="muted">#!/usr/bin/env bash</span>
 <span class="muted"># Continium — installateur PC : daemon + app + extension + service</span>
 set -euo pipefail
-BASE="https://github.com/lomaloma/continium/releases/latest/download"
+BASE="https://github.com/lomamalo/continium/releases/latest/download"
 BIN_DIR="$HOME/.local/bin"
 APP_DIR="$HOME/.local/share/continium"
 SERVICE_DIR="$HOME/.config/systemd/user"
@@ -193,7 +193,7 @@ curl -fsSL "$BASE/passerelle.xpi" -o "$EXT_DIR/passerelle.xpi"
 <span class="muted"># 4. Entree de menu + demarrage automatique</span>
 <span class="muted">#    (generes dans le script complet, voir le fichier installe :</span>
 <span class="muted">#     cat "$HOME/.local/share/continium/../..." — le script complet est</span>
-<span class="muted">#     sur GitHub : lomaloma/continium -> continium-site/install-pc.sh)</span>
+<span class="muted">#     sur GitHub : lomamalo/continium -> continium-site/install-pc.sh)</span>
 loginctl enable-linger "$USER" 2&gt;/dev/null <span class="muted">|| true</span>
 
 echo "==&gt; Continium installé. Lance :  continium"</pre>
