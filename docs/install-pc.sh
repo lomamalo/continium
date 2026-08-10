@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Continium — installateur PC tout-en-un.
 #
-#   curl -fsSL https://raw.githubusercontent.com/lomamalo/continium/main/continium-site/install-pc.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/lomamalo/continium/main/docs/install-pc.sh | bash
 #
 # Installe :
 #   1. le daemon Rust en service systemd utilisateur (démarre au boot, se relance seul)
