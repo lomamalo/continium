@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { width: 320px; font: 13px sans-serif; margin: 0; padding: 12px; }
+    h1 { font-size: 14px; margin: 0 0 10px; }
+    label { display: block; margin: 8px 0 4px; color: #555; }
+    input { width: 100%; box-sizing: border-box; padding: 6px; border: 1px solid #ccc; border-radius: 6px; }
+    .row { margin: 8px 0; color: #333; word-break: break-word; }
+    .row b { color: #555; }
+    button { margin-top: 10px; width: 100%; padding: 8px; border: none; border-radius: 6px;
+             background: #1a7f37; color: #fff; font-weight: 600; cursor: pointer; }
+    button:disabled { opacity: .6; cursor: default; }
+    #status { margin-top: 8px; font-size: 12px; min-height: 16px; }
+    .ok { color: #1a7f37; }
+    .err { color: #b3261e; }
+  </style>
+</head>
+<body>
+  <h1>Passerelle</h1>
+  <label for="daemonUrl">Adresse du daemon</label>
+  <input id="daemonUrl" placeholder="http://192.168.1.180:8081">
+  <div class="row"><b>Page :</b> <span id="pageTitle">—</span></div>
+  <div class="row"><b>Position YouTube :</b> <span id="ytPos">—</span></div>
+  <button id="send">Envoyer la page au tampon</button>
+  <div id="status"></div>
+  <script src="popup.js"></script>
+</body>
+</html>

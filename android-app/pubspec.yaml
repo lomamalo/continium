@@ -1,0 +1,26 @@
+name: continium
+description: "Passerelle - continuity companion between Linux PC and Android via ESP32."
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: '>=3.7.2 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  provider: ^6.1.2
+  web_socket_channel: ^3.0.1
+  url_launcher: ^6.3.1
+  shared_preferences: ^2.3.2
+  cupertino_icons: ^1.0.8
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/continium.png

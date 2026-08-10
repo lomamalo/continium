@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Continium — La continuité PC ⇄ téléphone</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">
+      <img src="assets/continium.png" alt="Continium" class="logo">
+      CONTINIUM
+    </div>
+    <div class="links" id="navLinks">
+      <a href="#fonctionnalites">Fonctionnalités</a>
+      <a href="#comment-ca-marche">Comment ça marche</a>
+      <a href="#telechargement">Téléchargement</a>
+      <a href="#installation">Installation</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-text">
+      <div class="eyebrow">ESP32-S3 · Rust · Flutter · 100% auto-hébergé</div>
+      <h1 class="title">CONTINIUM</h1>
+      <p class="tagline">
+        Copié sur le PC, continué sur le téléphone. Presse-papier, liens,
+        vidéos et fichiers traversent la passerelle — sans cloud, sans
+        compte, chez toi.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#telechargement">Télécharger l'app</a>
+        <a class="btn btn-secondary" href="#installation">Installer sur Linux</a>
+      </div>
+    </div>
+    <div class="hero-media">
+      <video autoplay muted loop playsinline preload="metadata">
+        <source src="assets/continium-hero.webm" type="video/webm">
+        <p>Ta navigation ne supporte pas la vidéo — <a href="assets/continium-hero.webm" download>télécharge la démo</a>.</p>
+      </video>
+    </div>
+  </div>
+</header>
+
+<section id="fonctionnalites">
+  <div class="wrap">
+    <h2>Tout ce qui passe, continue</h2>
+    <p class="section-sub">
+      L'app reçoit en quelques secondes ce que tu copies ou envoies depuis
+      le PC, catégorisé automatiquement.
+    </p>
+    <div class="grid3">
+      <div class="card">
+        <div class="dot" style="background:var(--accent)"></div>
+        <h3>Presse-papier universel</h3>
+        <p>Ctrl+C sur le PC, collé dans le presse-papier du téléphone. Le texte copié arrive sur l'app en direct, prêt à être recopié ou renvoyé.</p>
+      </div>
+      <div class="card">
+        <div class="dot" style="background:#FF5252"></div>
+        <h3>Liens &amp; vidéos</h3>
+        <p>Un lien YouTube copié devient une carte vidéo avec titre et position de lecture, à ouvrir sur le téléphone ou continuer sur le PC.</p>
+      </div>
+      <div class="card">
+        <div class="dot" style="background:var(--amber)"></div>
+        <h3>Fichiers &amp; renvoi</h3>
+        <p>Les fichiers poussés depuis le PC s'éditent dans l'app, et le résultat est réécrit dans le fichier d'origine côté PC.</p>
+      </div>
+      <div class="card">
+        <div class="dot" style="background:var(--blue)"></div>
+        <h3>Découverte automatique</h3>
+        <p>L'app trouve le daemon sur le réseau sans rien saisir : UDP broadcast, une connexion mémorisée, reconnexion automatique.</p>
+      </div>
+      <div class="card">
+        <div class="dot" style="background:var(--green)"></div>
+        <h3>Boîtier ESP32 autonome</h3>
+        <p>En veille entre deux cycles (~10 min) sur batterie, LED fixe quand il est branché. Son état et sa batterie s'affichent en direct dans l'app.</p>
+      </div>
+      <div class="card">
+        <div class="dot" style="background:var(--accent)"></div>
+        <h3>Extension navigateur</h3>
+        <p>Un bouton dans Firefox pour envoyer la page courante vers le téléphone : titre, URL, position de lecture — en un clic.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="comment-ca-marche">
+  <div class="wrap">
+    <h2>Trois pièces, une seule continuité</h2>
+    <p class="section-sub">
+      Chaque élément capturé traverse le pipeline en quelques millisecondes,
+      du presse-papier jusqu'à l'écran du téléphone.
+    </p>
+    <div class="pipeline">
+      <div class="pipe-node">
+        <div class="tag">Capture</div>
+        <div class="name">PC Linux</div>
+        <div class="desc">Presse-papier Wayland + X11, extension Firefox, fichiers</div>
+      </div>
+      <div class="pipe-arrow">&#8594;</div>
+      <div class="pipe-node">
+        <div class="tag">Daemon</div>
+        <div class="name">Rust</div>
+        <div class="desc">Service systemd utilisateur, tri, stockage, broadcast WebSocket</div>
+      </div>
+      <div class="pipe-arrow">&#8594;</div>
+      <div class="pipe-node">
+        <div class="tag">Boîtier</div>
+        <div class="name">ESP32-S3</div>
+        <div class="desc">Copie de secours en SPIFFS, rapport d'état, LED</div>
+      </div>
+      <div class="pipe-arrow">&#8594;</div>
+      <div class="pipe-node">
+        <div class="tag">Application</div>
+        <div class="name">Flutter</div>
+        <div class="desc">Carte de continuité en direct, éditeur, renvoi au PC</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="telechargement">
+  <div class="wrap">
+    <h2>Téléchargement</h2>
+    <p class="section-sub">
+      L'app Android s'installe en un fichier APK, directement depuis ce
+      bouton. Aucun magasin, aucun compte.
+    </p>
+    <div class="dl-card">
+      <img src="assets/continium.png" alt="Continium" class="dl-logo">
+      <div class="dl-info">
+        <h3>Continium — Android</h3>
+        <p class="dl-meta">v1.0.0 · APK debug · Android 10+</p>
+        <p class="dl-desc">Presse-papier, liens, fichiers, statut du boîtier en direct.</p>
+      </div>
+      <a class="btn btn-primary btn-lg" href="https://github.com/lomaloma/continium/releases/latest/download/continium.apk" id="apkBtn">
+        Télécharger l'APK
+      </a>
+    </div>
+    <p class="dl-note">
+      Maquette : le fichier <span class="muted">continium.apk</span> sera
+      généré à la mise en ligne. Taille estimée : ~25 Mo.
+    </p>
+  </div>
+</section>
+
+<section id="installation">
+  <div class="wrap">
+    <h2>Installation sur PC Linux</h2>
+    <p class="section-sub">
+      Une seule commande : elle télécharge le daemon, l'application, le
+      service systemd et l'extension Firefox, puis installe un raccourci
+      dans le menu.
+    </p>
+
+    <div class="code-block">
+      <span class="prompt">$</span> curl -fsSL https://raw.githubusercontent.com/lomaloma/continium/main/continium-site/install-pc.sh <span class="muted">|</span> bash
+      <button class="copy-btn" id="copyOneLiner" title="Copier">Copier</button>
+    </div>
+
+    <details class="script-details">
+      <summary>Voir le contenu du script <span class="muted">install-pc.sh</span></summary>
+      <pre class="code-block pre"><span class="muted">#!/usr/bin/env bash</span>
+<span class="muted"># Continium — installateur PC : daemon + app + extension + service</span>
+set -euo pipefail
+BASE="https://github.com/lomaloma/continium/releases/latest/download"
+BIN_DIR="$HOME/.local/bin"
+APP_DIR="$HOME/.local/share/continium"
+SERVICE_DIR="$HOME/.config/systemd/user"
+EXT_DIR="$HOME/.local/share/passerelle-extension"
+
+<span class="muted"># 1. Daemon Rust (service systemd utilisateur)</span>
+curl -fsSL "$BASE/passerelle-daemon" -o "$BIN_DIR/passerelle-daemon"
+chmod +x "$BIN_DIR/passerelle-daemon"
+<span class="muted"># ... service systemd genere puis active :
+# systemctl --user enable --now passerelle-daemon</span>
+
+<span class="muted"># 2. App Linux (AppImage, si presente dans la release)</span>
+curl -fsSL "$BASE/continium.AppImage" -o "$APP_DIR/continium.AppImage" \
+  || echo "(aucune AppImage, on continue sans)"
+
+<span class="muted"># 3. Extension Firefox (installation manuelle en un clic)</span>
+curl -fsSL "$BASE/passerelle.xpi" -o "$EXT_DIR/passerelle.xpi"
+
+<span class="muted"># 4. Entree de menu + demarrage automatique</span>
+<span class="muted">#    (generes dans le script complet, voir le fichier installe :</span>
+<span class="muted">#     cat "$HOME/.local/share/continium/../..." — le script complet est</span>
+<span class="muted">#     sur GitHub : lomaloma/continium -> continium-site/install-pc.sh)</span>
+loginctl enable-linger "$USER" 2&gt;/dev/null <span class="muted">|| true</span>
+
+echo "==&gt; Continium installé. Lance :  continium"</pre>
+    </details>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <h4>Installation PC</h4>
+          <p>Le daemon tourne en service systemd, l'app apparaît dans le menu, l'extension est prête.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <h4>APK sur le téléphone</h4>
+          <p>Bouton de téléchargement ci-dessus, installation avec les autorisations d'installation d'apps inconnues.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <h4>Connexion automatique</h4>
+          <p>L'app découvre le daemon sur le réseau et se connecte toute seule. Fini.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>Continium — projet local-first, auto-hébergé, sans dépendance cloud.</span>
+    <span>Firmware · Daemon · App · Extension — tout open, tout modifiable.</span>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>

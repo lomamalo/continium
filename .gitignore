@@ -1,0 +1,26 @@
+# Rust
+/linux-daemon/target/
+
+# Python
+__pycache__/
+*.pyc
+
+# Flutter / Android
+/android-app/build/
+/android-app/.dart_tool/
+/android-app/.flutter-plugins
+/android-app/.flutter-plugins-dependencies
+
+# ESP-IDF
+/esp32-firmware/build/
+/esp32-firmware/sdkconfig
+/esp32-firmware/sdkconfig.old
+/esp32-firmware/managed_components/
+
+# GUI config
+/linux-gui/.config/
+
+# IDE / OS
+.idea/
+.vscode/
+*.swp

@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "Passerelle",
+  "version": "0.1.0",
+  "description": "Envoie la page courante (et la position YouTube) au tampon Passerelle sur ton PC.",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "tabs"
+  ],
+  "host_permissions": [
+    "http://*/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Passerelle"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "passerelle-continuity@local",
+      "strict_min_version": "115.0"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
