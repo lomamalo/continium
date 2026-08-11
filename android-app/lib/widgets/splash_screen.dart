@@ -72,7 +72,7 @@ class _SplashScreenState extends State<SplashScreen>
       final h = image.height;
 
       final pts = <Offset>[];
-      const step = 3;
+      const step = 2;
       for (var y = 0; y < h; y += step) {
         for (var x = 0; x < w; x += step) {
           final i = (y * w + x) * 4;
@@ -83,14 +83,14 @@ class _SplashScreenState extends State<SplashScreen>
                   0.7152 * bytes[i + 1] +
                   0.0722 * bytes[i + 2]) /
               255.0;
-          if (a * lum > 0.22) pts.add(Offset(x.toDouble(), y.toDouble()));
+          if (a * lum > 0.28) pts.add(Offset(x.toDouble(), y.toDouble()));
         }
       }
       image.dispose();
       if (!mounted) return;
 
       if (pts.isNotEmpty) {
-        const maxPts = 240;
+        const maxPts = 420;
         if (pts.length > maxPts) {
           final out = <Offset>[];
           for (var i = 0; i < maxPts; i++) {
@@ -327,6 +327,7 @@ class _SplashPainter extends CustomPainter {
     final boxTopLeft = boxCenter - Offset(boxW / 2, boxH / 2);
 
     final paint = Paint();
+    final corePaint = Paint();
     final n = targets.length;
     final now = t * 4.2;
     for (var i = 0; i < n; i++) {
@@ -347,11 +348,11 @@ class _SplashPainter extends CustomPainter {
         pos = Offset.lerp(edge, targetPos, ease)!;
         alpha = ease;
       } else {
-        final amp = 0.8 + rng.nextDouble() * 2.2;
+        final amp = 0.6 + rng.nextDouble() * 1.6;
         final phase = rng.nextDouble() * math.pi * 2;
         final breathe = math.sin(now * 1.4 * math.pi * 2 + phase) * amp;
         pos = targetPos.translate(breathe, breathe * 0.6);
-        alpha = 0.9;
+        alpha = 0.95;
       }
 
       if (alpha < 0.03) continue;
@@ -360,11 +361,11 @@ class _SplashPainter extends CustomPainter {
         sprites.length - 1,
       );
       final sprite = sprites[spriteIdx];
-      final r = 3.5 + rng.nextDouble() * 6.0;
+      final r = 2.2 + rng.nextDouble() * 3.0;
       final dst = Rect.fromCenter(
         center: pos,
-        width: r * 2,
-        height: r * 2,
+        width: r * 2.4,
+        height: r * 2.4,
       );
       canvas.drawImageRect(
         sprite,
@@ -372,6 +373,8 @@ class _SplashPainter extends CustomPainter {
         dst,
         paint,
       );
+      corePaint.color = AppColors.accent.withValues(alpha: alpha);
+      canvas.drawCircle(pos, r * 0.55, corePaint);
     }
   }
 

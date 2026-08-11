@@ -150,92 +150,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final ws = context.watch<WebSocketService>();
-    final connected = ws.state == DaemonLinkState.connected;
-
-    final pages = const [StatusPanel(), ContinuityPage()];
-    const titles = ['Connexion', 'Continuity'];
+    final pages = [StatusPanel(onSettings: _showConnectDialog), const ContinuityPage()];
     final wide = MediaQuery.sizeOf(context).width >= 880;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Row(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(6),
-              child: Image.asset(
-                'assets/continium.png',
-                height: 26,
-                width: 26,
-                errorBuilder:
-                    (_, __, ___) => const Icon(Icons.hub_outlined, size: 22),
-              ),
-            ),
-            const SizedBox(width: 10),
-            Text(titles[_selectedIndex]),
-          ],
-        ),
-        actions: [
-          _DaemonStatusChip(connected: connected),
-          PopupMenuButton<int>(
-            tooltip: 'Menu',
-            initialValue: _selectedIndex,
-            icon: const Icon(Icons.menu),
-            color: AppColors.card,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(14),
-              side: const BorderSide(color: AppColors.divider),
-            ),
-            onSelected: (i) => setState(() => _selectedIndex = i),
-            itemBuilder:
-                (context) => [
-                  for (var i = 0; i < titles.length; i++)
-                    PopupMenuItem<int>(
-                      value: i,
-                      child: Row(
-                        children: [
-                          Icon(
-                            i == 0 ? Icons.bluetooth_connected : Icons.devices,
-                            size: 20,
-                            color:
-                                i == _selectedIndex
-                                    ? AppColors.accent
-                                    : AppColors.textSecondary,
-                          ),
-                          const SizedBox(width: 10),
-                          Text(
-                            titles[i],
-                            style: TextStyle(
-                              color:
-                                  i == _selectedIndex
-                                      ? AppColors.accent
-                                      : AppColors.textPrimary,
-                              fontWeight:
-                                  i == _selectedIndex
-                                      ? FontWeight.w700
-                                      : FontWeight.w400,
-                            ),
-                          ),
-                          if (i == _selectedIndex) ...[
-                            const Spacer(),
-                            const Icon(
-                              Icons.check,
-                              size: 16,
-                              color: AppColors.accent,
-                            ),
-                          ],
-                        ],
-                      ),
-                    ),
-                ],
-          ),
-          IconButton(
-            tooltip: 'Parametres de connexion',
-            icon: const Icon(Icons.settings_outlined),
-            onPressed: _showConnectDialog,
-          ),
-        ],
-      ),
       body: Stack(
         children: [
           const Positioned.fill(child: AmbientParticles()),
@@ -508,44 +426,6 @@ class _DiscoveryBoxState extends State<_DiscoveryBox> {
             ),
           ),
       ],
-    );
-  }
-}
-
-class _DaemonStatusChip extends StatelessWidget {
-  final bool connected;
-  const _DaemonStatusChip({required this.connected});
-
-  @override
-  Widget build(BuildContext context) {
-    final color = connected ? AppColors.statusGreen : AppColors.statusRed;
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 14, horizontal: 4),
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-      decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.12),
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: color.withValues(alpha: 0.4)),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(
-            connected ? Icons.podcasts : Icons.wifi_off,
-            size: 14,
-            color: color,
-          ),
-          const SizedBox(width: 6),
-          Text(
-            connected ? 'Daemon' : 'Hors ligne',
-            style: TextStyle(
-              color: color,
-              fontSize: 12,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

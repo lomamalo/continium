@@ -96,7 +96,7 @@ class ContinuumApp extends StatelessWidget {
             iconTheme: WidgetStateProperty.resolveWith((states) {
               return IconThemeData(
                 color: states.contains(WidgetState.selected)
-                    ? AppColors.accent
+                    ? Colors.black
                     : AppColors.textSecondary,
               );
             }),

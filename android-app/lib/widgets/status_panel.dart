@@ -9,7 +9,8 @@ import 'box_status_card.dart';
 import 'continuity_card.dart';
 
 class StatusPanel extends StatelessWidget {
-  const StatusPanel({super.key});
+  final VoidCallback? onSettings;
+  const StatusPanel({super.key, this.onSettings});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,11 @@ class StatusPanel extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _DaemonConnectionBanner(state: ws.state, error: ws.lastError),
+              _DaemonConnectionBanner(
+                state: ws.state,
+                error: ws.lastError,
+                onSettings: onSettings,
+              ),
               const SizedBox(height: 16),
               if (wide)
                 const Row(
@@ -58,7 +63,12 @@ class StatusPanel extends StatelessWidget {
 class _DaemonConnectionBanner extends StatelessWidget {
   final DaemonLinkState state;
   final String? error;
-  const _DaemonConnectionBanner({required this.state, required this.error});
+  final VoidCallback? onSettings;
+  const _DaemonConnectionBanner({
+    required this.state,
+    required this.error,
+    this.onSettings,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -117,6 +127,17 @@ class _DaemonConnectionBanner extends StatelessWidget {
               ],
             ),
           ),
+          if (onSettings != null)
+            IconButton(
+              tooltip: 'Parametres de connexion',
+              visualDensity: VisualDensity.compact,
+              icon: const Icon(
+                Icons.settings_outlined,
+                color: AppColors.textSecondary,
+                size: 20,
+              ),
+              onPressed: onSettings,
+            ),
         ],
       ),
     );
