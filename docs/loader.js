@@ -32,6 +32,8 @@
   var t0 = 0;
   var raf = 0;
   var box = 0, cx = 0, cy = 0;
+  var targets = [];
+  var textEl = document.querySelector('.loader-text');
 
   /* ---------------- canvas ---------------- */
   function resize() {
@@ -43,11 +45,35 @@
     canvas.style.width = W + 'px';
     canvas.style.height = H + 'px';
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-    box = Math.min(Math.max(Math.min(W, H) * 0.24, 130), 220);
-    cx = W / 2;
-    cy = H / 2 - box / 2 - 46;
   }
-  window.addEventListener('resize', function () { resize(); });
+
+  /* ---------------- placement adaptatif ----------------
+   * Le logo est positionné par rapport à la position réelle du titre
+   * (mesurée dans le DOM) : aucun recouvrement, quelle que soit la
+   * taille de l'écran ou l'orientation (portrait, paysage, très petit
+   * écran, barre d'adresse du navigateur mobile, ...).
+   */
+  function computeScene() {
+    var r = textEl.getBoundingClientRect();
+    box = Math.min(Math.max(Math.min(W, H) * 0.24, 80), Math.min(220, H * 0.3));
+    cx = W / 2;
+    cy = r.top - box / 2 - 24;
+    if (cy < box / 2 + 6) cy = box / 2 + 6;
+  }
+
+  function relayout() {
+    resize();
+    if (!particles.length) return;
+    computeScene();
+    for (var i = 0; i < particles.length; i++) {
+      var t = targets[i];
+      var p = particles[i];
+      p.tx = cx + (t[0] - 0.5) * box * 1.04;
+      p.ty = cy + (t[1] - 0.5) * box * 1.04;
+    }
+  }
+  window.addEventListener('resize', relayout);
+  window.addEventListener('orientationchange', relayout);
   resize();
 
   /* ---------------- sprites lumineux ---------------- */
@@ -271,10 +297,12 @@
    *            (logo vivant + titre étalé)
    * +FINAL_MS -> explosion, l'overlay s'efface, la page apparaît
    */
-  function launch(targets) {
+  function launch(targetsArr) {
+    targets = targetsArr;
     t0 = performance.now();
-    spawn(targets);
     loader.classList.add('active');
+    computeScene();
+    spawn(targets);
     setPhase('spawn');
 
     setTimeout(function () {
