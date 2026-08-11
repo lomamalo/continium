@@ -22,7 +22,7 @@
   var ctx = canvas.getContext('2d');
 
   var CONVERGE = 1250;   // ms : rassemblement des particules
-  var HOLD = 650;        // ms : le logo vit (pulsation, faible flottement)
+  var FINAL_MS = 2000;   // ms : état final figé (logo + titre) avant l'explosion
   var BURST = 850;       // ms : explosion vers les bords
 
   var W = 0, H = 0, DPR = 1;
@@ -263,7 +263,14 @@
     void now;
   }
 
-  /* ---------------- séquence ---------------- */
+  /* ---------------- séquence ----------------
+   * 0          -> converge : les particules dessinent le logo
+   * +150ms    -> le titre se déploie (flou -> net, letter-spacing)
+   *            (transitions du titre terminées ~+1350ms)
+   * +1350ms   -> état final figé pendant FINAL_MS (2 s)
+   *            (logo vivant + titre étalé)
+   * +FINAL_MS -> explosion, l'overlay s'efface, la page apparaît
+   */
   function launch(targets) {
     t0 = performance.now();
     spawn(targets);
@@ -275,9 +282,9 @@
     }, CONVERGE + 150);
 
     setTimeout(function () { setPhase('hold'); }, CONVERGE);
-    setTimeout(function () { setPhase('burst'); }, CONVERGE + HOLD);
-    setTimeout(function () { loader.classList.add('hide'); }, CONVERGE + HOLD + 140);
-    setTimeout(function () { cancelAnimationFrame(raf); loader.remove(); }, CONVERGE + HOLD + BURST + 650);
+    setTimeout(function () { setPhase('burst'); }, CONVERGE + 150 + 1200 + FINAL_MS);
+    setTimeout(function () { loader.classList.add('hide'); }, CONVERGE + 150 + 1200 + FINAL_MS + 160);
+    setTimeout(function () { cancelAnimationFrame(raf); loader.remove(); }, CONVERGE + 150 + 1200 + FINAL_MS + BURST + 700);
 
     var last = performance.now();
     (function loop(now) {
