@@ -8,14 +8,13 @@
 </head>
 <body>
 
-<!-- Chargement : les lignes s'alignent puis se fondent dans le logo -->
+<!-- Chargement : des particules convergent, dessinent le logo, puis explosent -->
 <div id="loader" class="loader" aria-hidden="true">
-  <div class="loader-inner">
-    <div class="loader-lines"><span></span><span></span><span></span><span></span></div>
-    <div class="loader-logo">
-      <img src="assets/continium.png" alt="Continium">
-      <span>CONTINIUM</span>
-    </div>
+  <canvas id="loaderCanvas"></canvas>
+  <div class="loader-text">
+    <div class="loader-word">CONTINIUM</div>
+    <div class="loader-rule"></div>
+    <div class="loader-sub">Copié sur le PC, continué sur le téléphone</div>
   </div>
 </div>
 
@@ -257,6 +256,7 @@ echo "==&gt; Continium installé. Ouvre : http://127.0.0.1:8081"</pre>
   </div>
 </footer>
 
-<script src="app.js"></script>
+  <script src="loader.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
