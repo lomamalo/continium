@@ -4,8 +4,9 @@
   --red:#FF6B6B; --mono:'DejaVu Sans Mono',monospace;
 }
 *{box-sizing:border-box; margin:0; padding:0;}
-html,body{background:var(--bg); color:var(--text); font-family:system-ui,-apple-system,'Segoe UI',sans-serif; min-height:100vh;}
+html{background:var(--bg); color:var(--text); font-family:system-ui,-apple-system,'Segoe UI',sans-serif; min-height:100vh;}
 body{display:flex; flex-direction:column;}
+#ambientCanvas{position:fixed; inset:0; z-index:-1; pointer-events:none;}
 
 header{
   position:sticky; top:0; z-index:10; backdrop-filter:blur(10px);

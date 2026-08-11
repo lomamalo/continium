@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'services/websocket_service.dart';
 import 'services/box_provisioning.dart';
-import 'screens/home_screen.dart';
+import 'widgets/splash_screen.dart';
 
 void main() {
   runApp(const ContinuumApp());
@@ -55,9 +55,77 @@ class ContinuumApp extends StatelessWidget {
             backgroundColor: AppColors.background,
             foregroundColor: AppColors.textPrimary,
             elevation: 0,
+            surfaceTintColor: Colors.transparent,
+            centerTitle: false,
+          ),
+          pageTransitionsTheme: const PageTransitionsTheme(
+            builders: {
+              TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
+              TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+            },
+          ),
+          dialogTheme: DialogThemeData(
+            backgroundColor: AppColors.card,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+          ),
+          snackBarTheme: const SnackBarThemeData(
+            backgroundColor: AppColors.card,
+            contentTextStyle: TextStyle(color: AppColors.textPrimary),
+            behavior: SnackBarBehavior.floating,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(14)),
+            ),
+          ),
+          navigationBarTheme: NavigationBarThemeData(
+            backgroundColor: AppColors.card,
+            surfaceTintColor: Colors.transparent,
+            indicatorColor: AppColors.accent,
+            labelTextStyle: WidgetStateProperty.resolveWith((states) {
+              return TextStyle(
+                color: states.contains(WidgetState.selected)
+                    ? AppColors.accent
+                    : AppColors.textSecondary,
+                fontSize: 12,
+                fontWeight: states.contains(WidgetState.selected)
+                    ? FontWeight.w700
+                    : FontWeight.w400,
+              );
+            }),
+            iconTheme: WidgetStateProperty.resolveWith((states) {
+              return IconThemeData(
+                color: states.contains(WidgetState.selected)
+                    ? AppColors.accent
+                    : AppColors.textSecondary,
+              );
+            }),
+          ),
+          inputDecorationTheme: InputDecorationTheme(
+            filled: true,
+            fillColor: AppColors.background,
+            labelStyle: const TextStyle(color: AppColors.textSecondary),
+            prefixIconColor: AppColors.textSecondary,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: const BorderSide(color: AppColors.divider),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: const BorderSide(color: AppColors.divider),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: const BorderSide(color: AppColors.accent, width: 1.4),
+            ),
+          ),
+          floatingActionButtonTheme: const FloatingActionButtonThemeData(
+            backgroundColor: AppColors.accent,
+            foregroundColor: Colors.black,
+            shape: StadiumBorder(),
           ),
         ),
-        home: const HomeScreen(),
+        home: const SplashScreen(),
       ),
     );
   }

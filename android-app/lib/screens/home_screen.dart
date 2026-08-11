@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../main.dart';
 import '../services/daemon_discovery.dart';
 import '../services/websocket_service.dart';
+import '../widgets/ambient_particles.dart';
 import '../widgets/status_panel.dart';
 import '../widgets/continuity_page.dart';
 
@@ -235,40 +236,47 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: Row(
+      body: Stack(
         children: [
-          if (wide)
-            NavigationRail(
-              selectedIndex: _selectedIndex,
-              onDestinationSelected: (i) => setState(() => _selectedIndex = i),
-              backgroundColor: AppColors.background,
-              indicatorColor: AppColors.accent,
-              labelType: NavigationRailLabelType.all,
-              selectedIconTheme: const IconThemeData(color: Colors.black),
-              unselectedIconTheme: const IconThemeData(
-                color: AppColors.textSecondary,
-              ),
-              selectedLabelTextStyle: const TextStyle(
-                color: AppColors.accent,
-                fontWeight: FontWeight.w700,
-              ),
-              unselectedLabelTextStyle: const TextStyle(
-                color: AppColors.textSecondary,
-              ),
-              destinations: const [
-                NavigationRailDestination(
-                  icon: Icon(Icons.bluetooth_connected_outlined),
-                  selectedIcon: Icon(Icons.bluetooth_connected),
-                  label: Text('Connexion'),
+          const Positioned.fill(child: AmbientParticles()),
+          Row(
+            children: [
+              if (wide)
+                NavigationRail(
+                  selectedIndex: _selectedIndex,
+                  onDestinationSelected: (i) => setState(() => _selectedIndex = i),
+                  backgroundColor: AppColors.background,
+                  indicatorColor: AppColors.accent,
+                  labelType: NavigationRailLabelType.all,
+                  selectedIconTheme: const IconThemeData(color: Colors.black),
+                  unselectedIconTheme: const IconThemeData(
+                    color: AppColors.textSecondary,
+                  ),
+                  selectedLabelTextStyle: const TextStyle(
+                    color: AppColors.accent,
+                    fontWeight: FontWeight.w700,
+                  ),
+                  unselectedLabelTextStyle: const TextStyle(
+                    color: AppColors.textSecondary,
+                  ),
+                  destinations: const [
+                    NavigationRailDestination(
+                      icon: Icon(Icons.bluetooth_connected_outlined),
+                      selectedIcon: Icon(Icons.bluetooth_connected),
+                      label: Text('Connexion'),
+                    ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.devices_outlined),
+                      selectedIcon: Icon(Icons.devices),
+                      label: Text('Continuity'),
+                    ),
+                  ],
                 ),
-                NavigationRailDestination(
-                  icon: Icon(Icons.devices_outlined),
-                  selectedIcon: Icon(Icons.devices),
-                  label: Text('Continuity'),
-                ),
-              ],
-            ),
-          Expanded(child: IndexedStack(index: _selectedIndex, children: pages)),
+              Expanded(
+                child: IndexedStack(index: _selectedIndex, children: pages),
+              ),
+            ],
+          ),
         ],
       ),
       bottomNavigationBar:

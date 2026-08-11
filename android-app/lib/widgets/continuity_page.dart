@@ -299,6 +299,13 @@ class _Header extends StatelessWidget {
               border: Border.all(
                 color: AppColors.accent.withValues(alpha: 0.35),
               ),
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.accent.withValues(alpha: 0.18),
+                  blurRadius: 18,
+                  spreadRadius: -4,
+                ),
+              ],
             ),
             child: const Icon(Icons.devices, color: AppColors.accent, size: 26),
           ),
@@ -407,11 +414,26 @@ class _EmptyState extends StatelessWidget {
               decoration: BoxDecoration(
                 color: AppColors.card,
                 shape: BoxShape.circle,
-                border: Border.all(color: AppColors.divider),
+                border: Border.all(
+                  color: hasItems
+                      ? AppColors.divider
+                      : AppColors.accent.withValues(alpha: 0.35),
+                ),
+                boxShadow: hasItems
+                    ? null
+                    : [
+                        BoxShadow(
+                          color: AppColors.accent.withValues(alpha: 0.10),
+                          blurRadius: 26,
+                          spreadRadius: -6,
+                        ),
+                      ],
               ),
               child: Icon(
                 hasItems ? Icons.search_off : Icons.content_copy,
-                color: AppColors.textSecondary,
+                color: hasItems
+                    ? AppColors.textSecondary
+                    : AppColors.accent,
                 size: 36,
               ),
             ),

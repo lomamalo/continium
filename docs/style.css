@@ -15,14 +15,17 @@
   --sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
 }
 *{box-sizing:border-box;}
-html{scroll-behavior:smooth;}
+html{scroll-behavior:smooth; background:var(--bg);}
 body{
-  margin:0; background:var(--bg); color:var(--text); font-family:var(--sans);
+  margin:0; color:var(--text); font-family:var(--sans);
   line-height:1.55; -webkit-font-smoothing:antialiased;
 }
 a{color:var(--accent); text-decoration:none;}
 a:hover{text-decoration:underline;}
 .wrap{max-width:1040px; margin:0 auto; padding:0 24px;}
+
+/* ---- particules d'ambiance (fond permanent) ---- */
+#ambientCanvas{position:fixed; inset:0; z-index:-1; pointer-events:none;}
 
 /* ---- loader : particules -> logo (canvas) ---- */
 .loader{
