@@ -156,9 +156,10 @@
   <div class="wrap">
     <h2>Installation sur PC Linux</h2>
     <p class="section-sub">
-      Une seule commande : elle télécharge le daemon, l'application, le
-      service systemd et l'extension Firefox, puis installe un raccourci
-      dans le menu.
+      Une seule commande : elle installe le daemon en service systemd
+      (presse-papier + serveur web + boitier) et pose un raccourci sur le
+      Bureau. L'app s'ouvre dans le navigateur — aucune dépendance, aucune
+      compilation, toutes distros.
     </p>
 
     <div class="code-block">
@@ -166,16 +167,21 @@
       <button class="copy-btn" id="copyOneLiner" title="Copier">Copier</button>
     </div>
 
+    <p class="dl-note">
+      Pour retrouver l'URL de l'app (sur ce PC ou sur le réseau) :
+      <span class="muted">curl -fsSL …/install-pc.sh | bash -s - -ip</span>
+    </p>
+
     <details class="script-details">
       <summary>Voir le contenu du script <span class="muted">install-pc.sh</span></summary>
       <pre class="code-block pre"><span class="muted">#!/usr/bin/env bash</span>
-<span class="muted"># Continium — installateur PC : daemon + app + extension + service</span>
+<span class="muted"># Continium — installateur PC : daemon + service + raccourci + extension</span>
 set -euo pipefail
 BASE="https://github.com/lomamalo/continium/releases/latest/download"
 BIN_DIR="$HOME/.local/bin"
 APP_DIR="$HOME/.local/share/continium"
 SERVICE_DIR="$HOME/.config/systemd/user"
-EXT_DIR="$HOME/.local/share/passerelle-extension"
+URL_LOCAL="http://127.0.0.1:8081"
 
 <span class="muted"># 1. Daemon Rust (service systemd utilisateur)</span>
 curl -fsSL "$BASE/passerelle-daemon" -o "$BIN_DIR/passerelle-daemon"
@@ -183,20 +189,24 @@ chmod +x "$BIN_DIR/passerelle-daemon"
 <span class="muted"># ... service systemd genere puis active :
 # systemctl --user enable --now passerelle-daemon</span>
 
-<span class="muted"># 2. App Linux (AppImage, si presente dans la release)</span>
-curl -fsSL "$BASE/continium.AppImage" -o "$APP_DIR/continium.AppImage" \
-  || echo "(aucune AppImage, on continue sans)"
+<span class="muted"># 2. Raccourci sur le Bureau vers l'app web (navigateur)</span>
+cat &gt; "$(xdg-user-dir DESKTOP)/continium.desktop" &lt;&lt;EOF
+[Desktop Entry]
+Type=Application
+Name=Continium
+Exec=xdg-open $URL_LOCAL
+Icon=$APP_DIR/continium.png
+Terminal=false
+EOF
 
 <span class="muted"># 3. Extension Firefox (installation manuelle en un clic)</span>
 curl -fsSL "$BASE/passerelle.xpi" -o "$EXT_DIR/passerelle.xpi"
 
-<span class="muted"># 4. Entree de menu + demarrage automatique</span>
-<span class="muted">#    (generes dans le script complet, voir le fichier installe :</span>
-<span class="muted">#     cat "$HOME/.local/share/continium/../..." — le script complet est</span>
-<span class="muted">#     sur GitHub : lomamalo/continium -> docs/install-pc.sh)</span>
+<span class="muted"># Option -ip : affiche l'URL sans reinstaller :
+# curl -fsSL …/install-pc.sh | bash -s - -ip</span>
 loginctl enable-linger "$USER" 2&gt;/dev/null <span class="muted">|| true</span>
 
-echo "==&gt; Continium installé. Lance :  continium"</pre>
+echo "==&gt; Continium installé. Ouvre : http://127.0.0.1:8081"</pre>
     </details>
 
     <div class="steps">
@@ -204,7 +214,7 @@ echo "==&gt; Continium installé. Lance :  continium"</pre>
         <div class="step-num">1</div>
         <div>
           <h4>Installation PC</h4>
-          <p>Le daemon tourne en service systemd, l'app apparaît dans le menu, l'extension est prête.</p>
+          <p>Le daemon tourne en service systemd (presse-papier, web, boitier), un raccourci apparaît sur le Bureau.</p>
         </div>
       </div>
       <div class="step">

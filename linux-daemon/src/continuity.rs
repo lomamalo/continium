@@ -576,6 +576,39 @@ async fn handle_http(
         return Ok(());
     }
 
+    // Web app (interface navigateur) : fichiers embarqués dans le binaire.
+    if request_line.starts_with("GET /") && !request_line.starts_with("GET /continuity")
+        && !request_line.starts_with("GET /box")
+    {
+        let path = request_line
+            .split_whitespace()
+            .nth(1)
+            .unwrap_or("/")
+            .split('?')
+            .next()
+            .unwrap_or("/");
+        if let Some((content_type, bytes)) = crate::web::serve(path) {
+            let resp = format!(
+                "HTTP/1.1 200 OK\r\nContent-Type: {content_type}\r\nContent-Length: {}\r\nCache-Control: no-cache\r\nConnection: close\r\n\r\n",
+                bytes.len()
+            );
+            stream.write_all(resp.as_bytes()).await?;
+            stream.write_all(bytes).await?;
+            stream.flush().await?;
+            return Ok(());
+        }
+        // Chemin web inconnu : 404 HTML minimal.
+        let payload = b"<!doctype html><html><body>404</body></html>";
+        let resp = format!(
+            "HTTP/1.1 404 Not Found\r\nContent-Type: text/html; charset=utf-8\r\nContent-Length: {}\r\nConnection: close\r\n\r\n",
+            payload.len()
+        );
+        stream.write_all(resp.as_bytes()).await?;
+        stream.write_all(payload).await?;
+        stream.flush().await?;
+        return Ok(());
+    }
+
     // Read the remaining body bytes: some may already be in the head buffer.
     let mut body: Vec<u8> = head[head_end..].to_vec();
     while body.len() < content_length {

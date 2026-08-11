@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Continium</title>
+  <link rel="icon" href="/icon.png" type="image/png">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <img class="logo" src="/icon.png" alt="Continium">
+      <h1>CONTINIUM</h1>
+    </div>
+    <div class="conn" id="conn">
+      <span class="dot"></span>
+      <span id="connText">connexion…</span>
+    </div>
+  </header>
+
+  <div class="boxbar" id="boxbar">
+    <span id="boxState">Boitier : inconnu</span>
+    <span id="boxExtra"></span>
+  </div>
+
+  <main id="items" class="items"></main>
+
+  <div id="empty" class="empty" hidden>
+    <h2>Rien pour l'instant</h2>
+    <p>Copie quelque chose sur ce PC ou envoie depuis le téléphone — ça apparaîtra ici.</p>
+  </div>
+
+  <div id="snack" class="snack" hidden></div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

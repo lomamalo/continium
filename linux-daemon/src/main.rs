@@ -1,6 +1,7 @@
 mod continuity;
 mod discovery;
 mod serial;
+mod web;
 mod ws;
 
 use std::sync::Arc;
