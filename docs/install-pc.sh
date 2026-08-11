@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # Continium — installateur PC tout-en-un, compatible toutes distros Linux.
+# Conçu et développé par Malo Lemoine — github.com/lomamalo/continium
 #
 #   curl -fsSL https://raw.githubusercontent.com/lomamalo/continium/main/docs/install-pc.sh | bash
 #   curl -fsSL .../install-pc.sh | bash -s - -ip        # afficher l'URL de l'app

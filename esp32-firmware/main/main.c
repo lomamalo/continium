@@ -1,3 +1,5 @@
+// Continium — firmware du boitier passerelle (ESP32-S3).
+// Conçu et développé par Malo Lemoine — github.com/lomamalo/continium
 #include <stdio.h>
 #include <string.h>
 #include <inttypes.h>

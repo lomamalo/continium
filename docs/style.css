@@ -24,6 +24,60 @@ a{color:var(--accent); text-decoration:none;}
 a:hover{text-decoration:underline;}
 .wrap{max-width:1040px; margin:0 auto; padding:0 24px;}
 
+/* ---- loader : les lignes arrivent puis se fondent dans le logo ---- */
+.loader{
+  position:fixed; inset:0; z-index:100; background:var(--bg);
+  display:flex; align-items:center; justify-content:center;
+  animation:loader-out .6s ease 1.7s forwards;
+}
+.loader-inner{display:flex; flex-direction:column; align-items:center; gap:22px;}
+.loader-lines{
+  display:flex; flex-direction:column; gap:10px; width:132px;
+  animation:lines-out .4s ease 1.15s forwards;
+}
+.loader-lines span{
+  display:block; height:3px; border-radius:3px; transform:scaleX(0); transform-origin:left;
+  background:linear-gradient(90deg, transparent, var(--accent) 35%, var(--accent) 65%, transparent);
+  box-shadow:0 0 10px var(--accent-dim);
+  animation:line-in .45s cubic-bezier(.2,.7,.3,1) forwards;
+}
+.loader-lines span:nth-child(1){animation-delay:.1s;}
+.loader-lines span:nth-child(2){animation-delay:.3s;}
+.loader-lines span:nth-child(3){animation-delay:.5s;}
+.loader-lines span:nth-child(4){animation-delay:.7s;}
+@keyframes line-in{from{transform:scaleX(0); opacity:0;} to{transform:scaleX(1); opacity:1;}}
+@keyframes lines-out{to{opacity:0; transform:scaleY(.25);}}
+.loader-logo{
+  opacity:0; display:flex; flex-direction:column; align-items:center; gap:12px;
+  animation:logo-in .55s ease 1.2s forwards;
+}
+.loader-logo img{
+  width:56px; height:56px; border-radius:14px; object-fit:cover;
+  animation:logo-pop .55s cubic-bezier(.2,.7,.3,1.4) 1.2s forwards;
+}
+.loader-logo span{
+  font-family:var(--mono); font-size:13px; color:var(--text);
+  animation:tracking-in .7s ease 1.2s forwards;
+}
+@keyframes logo-in{from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:none;}}
+@keyframes logo-pop{0%{transform:scale(.35); opacity:0;} 60%{transform:scale(1.12); opacity:1;} 100%{transform:scale(1); opacity:1;}}
+@keyframes tracking-in{from{letter-spacing:.05em; opacity:0;} to{letter-spacing:.5em; opacity:1;}}
+@keyframes loader-out{to{opacity:0; visibility:hidden;}}
+@media (prefers-reduced-motion: reduce){
+  .loader{display:none;}
+}
+
+/* ---- github link ---- */
+nav .links .gh-link{
+  display:inline-flex; align-items:center; gap:7px;
+  border:1px solid var(--divider); border-radius:8px; padding:6px 12px;
+  color:var(--text);
+}
+nav .links .gh-link:hover{color:var(--accent); border-color:var(--accent-dim); text-decoration:none;}
+@media (max-width:900px){
+  nav .links .gh-link{align-self:flex-start; margin-top:8px; border-color:var(--accent-dim);}
+}
+
 /* ---- nav ---- */
 nav{
   position:sticky; top:0; z-index:20; backdrop-filter:blur(10px);
@@ -180,6 +234,9 @@ section h2{font-family:var(--mono); font-size:26px; letter-spacing:0.02em; margi
 
 footer{border-top:1px solid var(--divider); padding:36px 0; color:var(--text-dim); font-size:13px;}
 footer .wrap{display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;}
+footer strong{color:var(--text);}
+footer a{color:var(--text-dim);}
+footer a:hover{color:var(--accent); text-decoration:none;}
 
 ::selection{background:var(--accent); color:#04201A;}
 

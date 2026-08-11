@@ -1,9 +1,11 @@
-# Passerelle
+# Passerelle — Continium
 
 **La continuité entre ton PC Linux et ton téléphone, portée par un boîtier
 ESP32 que tu contrôles de bout en bout.** Firmware, daemon, application
 mobile et panneau de contrôle Linux -- un seul projet, zéro dépendance
 cloud, auto-hébergé.
+
+> **Conçu et développé par Malo Lemoine** — site : <https://lomamalo.github.io/continium> — dépôt : <https://github.com/lomamalo/continium>
 
 Page de présentation : [`marketing/index.html`](marketing/index.html)
 (ouvre-la simplement dans un navigateur). Check-list complète de toutes

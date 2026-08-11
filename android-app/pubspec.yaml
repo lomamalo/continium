@@ -1,5 +1,5 @@
 name: continium
-description: "Passerelle - continuity companion between Linux PC and Android via ESP32."
+description: "Continium - passerelle de continuite PC <-> telephone par ESP32. Concu par Malo Lemoine."
 publish_to: 'none'
 version: 0.1.0+1
 

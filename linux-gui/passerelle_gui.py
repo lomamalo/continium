@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
 Passerelle - Panneau de controle Linux.
+Continium — conçu et développé par Malo Lemoine (github.com/lomamalo/continium).
 
 Petite interface graphique (Tkinter, aucune dependance externe hors
 python3-tk) pour piloter le daemon, compiler/flasher le firmware ESP32,

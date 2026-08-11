@@ -1,5 +1,8 @@
 # Architecture détaillée du projet Passerelle
 
+> Projet Continium — conçu et développé par **Malo Lemoine**.
+> Dépôt : <https://github.com/lomamalo/continium>
+
 ## Vue d'ensemble
 
 Passerelle est un système de continuité entre PC Linux et smartphone Android via un boîtier ESP32 FireBeetle 2 (ESP32-S3).

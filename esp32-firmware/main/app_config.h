@@ -58,6 +58,7 @@
 
 /* ---------------- Firmware ---------------- */
 #define APP_FIRMWARE_VERSION "0.4.0"
+#define APP_AUTHOR "Malo Lemoine"
 
 /* ---------------- WiFi + battery-powered sync (box buffer) ----------------
  * The box runs on battery, connects to the home WiFi (credentials are

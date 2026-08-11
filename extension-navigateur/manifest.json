@@ -2,8 +2,13 @@
   "manifest_version": 2,
   "name": "Passerelle",
   "version": "0.1.0",
-  "description": "Envoie la page courante (et la position YouTube) au tampon Passerelle sur ton PC.",
-  "permissions": ["storage", "activeTab", "tabs", "http://*/*"],
+  "description": "Envoie la page courante (et la position YouTube) au tampon Passerelle sur ton PC. Conçu par Malo Lemoine.",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "tabs",
+    "http://*/*"
+  ],
   "browser_specific_settings": {
     "gecko": {
       "id": "passerelle-continuity@local",
@@ -11,7 +16,9 @@
     }
   },
   "background": {
-    "scripts": ["background.js"]
+    "scripts": [
+      "background.js"
+    ]
   },
   "browser_action": {
     "default_popup": "popup.html",
@@ -19,9 +26,14 @@
   },
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["content.js"],
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ],
       "run_at": "document_idle"
     }
-  ]
+  ],
+  "author": "Malo Lemoine"
 }

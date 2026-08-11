@@ -1,5 +1,8 @@
 # Commandes -- de zero a un systeme Passerelle complet
 
+> Projet Continium — conçu et développé par **Malo Lemoine**.
+> Dépôt : <https://github.com/lomamalo/continium>
+
 Check-list de toutes les commandes a taper, dans l'ordre, pour installer et
 faire fonctionner l'ensemble du projet sur un PC Linux (teste sur base
 Debian/Ubuntu/Raspberry Pi OS et Fedora). Pour l'installation automatisee
