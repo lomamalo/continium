@@ -55,8 +55,20 @@ mkdir -p "$BIN_DIR" "$APP_DIR" "$SERVICE_DIR" "$EXT_DIR"
 
 # ---------------------------------------------------------------- 1. daemon
 echo "==> [1/2] Daemon Rust (service systemd) -> $BIN_DIR/passerelle-daemon"
-curl -fsSL "$BASE/passerelle-daemon" -o "$BIN_DIR/passerelle-daemon"
-chmod +x "$BIN_DIR/passerelle-daemon"
+mkdir -p "$BIN_DIR"
+curl -fsSL "$BASE/passerelle-daemon" -o "$BIN_DIR/passerelle-daemon.tmp"
+chmod +x "$BIN_DIR/passerelle-daemon.tmp"
+
+# Upgrade propre : on arrete tout avant de remplacer le binaire (un
+# binaire en cours d'execution ne peut pas etre ecrase, ETXTBSY).
+systemctl --user stop passerelle-daemon.service 2>/dev/null || true
+for pid in $(pgrep -f "^$BIN_DIR/passerelle-daemon" || true); do
+  echo "    (arret du daemon manuel PID $pid)"
+  kill "$pid" 2>/dev/null || true
+done
+sleep 1
+
+mv -f "$BIN_DIR/passerelle-daemon.tmp" "$BIN_DIR/passerelle-daemon"
 
 UNIT="$SERVICE_DIR/passerelle-daemon.service"
 cat > "$UNIT" <<EOF
@@ -75,13 +87,6 @@ StandardError=append:$LOG_FILE
 [Install]
 WantedBy=default.target
 EOF
-
-# Arrete un daemon lance a la main pour liberer les ports (si present).
-for pid in $(pgrep -f "^$BIN_DIR/passerelle-daemon" || true); do
-  echo "    (arret du daemon manuel PID $pid)"
-  kill "$pid" 2>/dev/null || true
-done
-sleep 1
 
 systemctl --user daemon-reload
 systemctl --user enable --now passerelle-daemon.service
